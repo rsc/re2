@@ -7,6 +7,8 @@
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
+exports_files(["mypy.ini"])
+
 pybind_extension(
     name = "_re2",
     srcs = ["_re2.cc"],
@@ -19,7 +21,7 @@ pybind_extension(
 py_library(
     name = "re2",
     srcs = ["re2.py"],
-    data = [":_re2"],
+    data = [":_re2", "re2.pyi", "_re2.pyi"],
     imports = ["."],
     visibility = ["//visibility:public"],
 )
